@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import struct
@@ -13,20 +12,35 @@ f = open(input_file, 'rb+')
 
 
 def read_bytes_as_hex(position):
-        return read_bytes(position).encode('hex')
+        try:
+                return read_bytes(position).encode('hex')
+        except ValueError:
+                sys.exit("ERROR (hex): {}".format(input_file))
 
 def read_bytes_as_utf(position):
         byt = read_bytes(position)
-        return byt.decode('utf-8')
+        try:
+                return byt.decode('utf-8')
+        except ValueError:
+                sys.exit("ERROR (utf): {}".format(input_file))
 
 def read_bytes_as_int(position):
-        return int(read_bytes_as_hex(position), 16)
+        try:
+                return int(read_bytes_as_hex(position), 16)
+        except ValueError:
+                sys.exit("ERROR (int): {}".format(input_file))
 
 def read_bytes_as_float(position):
-        return struct.unpack('<f', read_bytes_as_hex(position).decode('hex'))[0]
+        try:
+                return struct.unpack('<f', read_bytes_as_hex(position).decode('hex'))[0]
+        except ValueError:
+                sys.exit("ERROR (float): {}".format(input_file))
 
 def read_bytes(byte_count):
-        return f.read(byte_count)
+        try:
+                return f.read(byte_count)
+        except ValueError:
+                sys.exit("ERROR (byte): {}".format(input_file))
 
 
 bs = f.read()
@@ -54,8 +68,7 @@ while i < 32:
         l.append(round(v, 3))
         i += 1
 
-#print 'file,name,height,breast,bheight,bdirect,bspacing,bangle,blength,aerolpuff,nipwid,head,neckwid,neckthik,thorwid,thorthik,cheswid,chesthik,waistwid,waistthik,waistheight,pelviswid,pelvisthik,hipswidth,hipsthik,butt,buttang,thighs,legs,calves,ankles,should,uparm,lowarm,areolasize,bsoft,bweight'
-
+print 'file,name,height,breast,bheight,bdirect,bspacing,bangle,blength,aerolpuff,nipwid,head,neckwid,neckthik,thorwid,thorthik,cheswid,chesthik,waistwid,waistthik,waistheight,pelviswid,pelvisthik,hipswidth,hipsthik,butt,buttang,thighs,legs,calves,ankles,should,uparm,lowarm,areolasize,bsoft,bweight'
 
 f.seek(clothes - 24)
 areola = read_bytes_as_float(4)
