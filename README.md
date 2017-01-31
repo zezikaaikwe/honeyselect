@@ -2,7 +2,7 @@
 Various utilities for Honey Select
 
 ---
-BetterBoru.user.js
+BetterBooru.user.js
 ---
 
 Adds save functionality, displays character rating, bigger card images.
