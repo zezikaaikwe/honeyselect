@@ -7,6 +7,8 @@ BetterBooru.user.js
 
 Adds save functionality, displays character rating, bigger card images.
 
+![img](http://i.imgur.com/gm8ZdCN.png)
+
 ---
 chara_details.py
 ---
